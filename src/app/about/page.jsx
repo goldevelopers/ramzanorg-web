@@ -116,11 +116,11 @@ export default function About() {
               Follow on Instagram
             </SocialLink>
             <SocialLink
-              href="mailto:scholarship@ramzan.org"
+              href="mailto:scholarship@ramzan.org.pk"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              scholarship@ramzan.org
+              scholarship@ramzan.org.pk
             </SocialLink>
           </ul>
         </div>

@@ -25,7 +25,6 @@ export function Footer() {
               <NavLink href="/scholarship">Scholarship</NavLink>
               <NavLink href="/success">Success</NavLink>
               <NavLink href="/apply">Apply</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
                 &copy; {new Date().getFullYear()} Ramzan Talent Scholarship. All rights

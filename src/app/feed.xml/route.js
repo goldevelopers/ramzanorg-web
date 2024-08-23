@@ -10,13 +10,13 @@ export async function GET(req) {
   }
 
   let author = {
-    name: 'Spencer Sharp',
-    email: 'spencer@planetaria.tech',
+    name: 'Admin',
+    email: 'scholarship@ramzan.org.pk',
   }
 
   let feed = new Feed({
     title: author.name,
-    description: 'Your blog description',
+    description: 'News Updates from Ramzan Talent Scholarship',
     author,
     id: siteUrl,
     link: siteUrl,
