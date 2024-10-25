@@ -37,7 +37,7 @@ export const metadata = {
   description:
     '',
 }
-
+export const runtime = 'edge';
 export default async function ArticlesIndex() {
   let articles = await getAllArticles()
 
