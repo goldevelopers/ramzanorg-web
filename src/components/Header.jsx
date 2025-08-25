@@ -116,7 +116,7 @@ function MobileNavigation(props) {
             <MobileNavItem href="/about">About</MobileNavItem>
             <MobileNavItem href="/scholarship">Scholarship</MobileNavItem>
             <MobileNavItem href="/articles">Articles</MobileNavItem>
-            <MobileNavItem href="/apply">Apply</MobileNavItem>
+            <MobileNavItem href="https://apply.ramzan.org.pk/signin">Apply</MobileNavItem>
           </ul>
         </nav>
       </PopoverPanel>
@@ -154,7 +154,7 @@ function DesktopNavigation(props) {
         <NavItem href="/about">About</NavItem>
         <NavItem href="/scholarship">Scholarship</NavItem>
         <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/apply">Apply</NavItem>
+        <NavItem href="https://apply.ramzan.org.pk/signin">Apply</NavItem>
       </ul>
     </nav>
   )
