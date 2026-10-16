@@ -12,7 +12,6 @@ import {
 import { Button } from '@/components/Button'
 import logoImage from '@/images/logo.png'
 
-const STORAGE_KEY = 'rts-2026-popup-dismissed'
 const APPLY_URL = 'https://apply.ramzan.org.pk/signin'
 
 function CloseIcon(props) {
@@ -34,18 +33,10 @@ export function ApplicationsPopup() {
   let [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    try {
-      if (window.sessionStorage.getItem(STORAGE_KEY)) {
-        return
-      }
-    } catch {}
     setIsOpen(true)
   }, [])
 
   function close() {
-    try {
-      window.sessionStorage.setItem(STORAGE_KEY, '1')
-    } catch {}
     setIsOpen(false)
   }
 

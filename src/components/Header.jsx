@@ -193,7 +193,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
+        'h-14 w-14 rounded-xl bg-white/90 p-1 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
       )}
       {...props}
     />
@@ -211,10 +211,10 @@ function Avatar({ large = false, className, ...props }) {
       <Image
         src={avatarImage}
         alt=""
-        sizes={large ? '4rem' : '2.25rem'}
+        sizes={large ? '7rem' : '3rem'}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
-          large ? 'h-16 w-16' : 'h-9 w-9',
+          'rounded-lg bg-white object-cover',
+          large ? 'h-28 w-28' : 'h-12 w-12',
         )}
         priority
       />
@@ -288,9 +288,11 @@ export function Header() {
       }
 
       let fromScale = 1
-      let toScale = 36 / 64
+      let toScale = 48 / 112
       let fromX = 0
-      let toX = 2 / 16
+      let toX = 4 / 16
+      let fromY = 0
+      let toY = -1
 
       let scrollY = downDelay - window.scrollY
 
@@ -300,14 +302,18 @@ export function Header() {
       let x = (scrollY * (fromX - toX)) / downDelay + toX
       x = clamp(x, fromX, toX)
 
+      let y = (scrollY * (fromY - toY)) / downDelay + toY
+      y = clamp(y, fromY, toY)
+
       setProperty(
         '--avatar-image-transform',
-        `translate3d(${x}rem, 0, 0) scale(${scale})`,
+        `translate3d(${x}rem, ${y}rem, 0) scale(${scale})`,
       )
 
       let borderScale = 1 / (toScale / scale)
       let borderX = (-toX + x) * borderScale
-      let borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
+      let borderY = (-toY + y) * borderScale
+      let borderTransform = `translate3d(${borderX}rem, ${borderY}rem, 0) scale(${borderScale})`
 
       setProperty('--avatar-border-transform', borderTransform)
       setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
@@ -342,7 +348,7 @@ export function Header() {
           <>
             <div
               ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              className="order-last mt-[calc(theme(spacing.28)-theme(spacing.3))]"
             />
             <Container
               className="top-0 order-last -mb-3 pt-3"
@@ -366,7 +372,7 @@ export function Header() {
                   />
                   <Avatar
                     large
-                    className="block h-16 w-16 origin-left"
+                    className="block h-28 w-28 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
                 </div>
