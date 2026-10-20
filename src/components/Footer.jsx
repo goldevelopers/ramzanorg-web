@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { ContainerInner, ContainerOuter } from '@/components/Container'
+import { WhatsAppWidget } from '@/components/WhatsAppWidget'
 
 function NavLink({ href, children }) {
   return (
@@ -34,6 +35,7 @@ export function Footer() {
           </ContainerInner>
         </div>
       </ContainerOuter>
+      <WhatsAppWidget />
     </footer>
   )
 }
