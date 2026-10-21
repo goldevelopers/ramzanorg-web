@@ -1,5 +1,5 @@
 // Mirrors the WhatsApp button on apply.ramzan.org.pk
-const WHATSAPP_NUMBER = '923028109497'
+const WHATSAPP_NUMBER = '923316204332'
 const WHATSAPP_MESSAGE = 'Hi! I need help with the Ramzan Scholarship.'
 
 function WhatsAppIcon(props) {
