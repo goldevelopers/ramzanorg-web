@@ -6,6 +6,7 @@ import { ArticleCard } from '@/components/ArticleCard'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { DaysLeft } from '@/components/DaysLeft'
+import { EligibilityChecker } from '@/components/EligibilityChecker'
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -117,7 +118,7 @@ function Hero() {
               Start your application
               <ArrowRightIcon className="h-[18px] w-[18px]" />
             </Button>
-            <Button href="#eligibility" variant="secondary">
+            <Button href="#check-eligibility" variant="secondary">
               Check if you’re eligible
             </Button>
           </div>
@@ -240,7 +241,7 @@ function HowItWorks() {
 function Eligibility() {
   return (
     <section id="eligibility" className="scroll-mt-24 bg-forest-50">
-      <Container className="flex flex-col gap-12 py-16 sm:py-28 lg:flex-row lg:gap-16">
+      <Container className="flex flex-col gap-12 pb-14 pt-16 sm:pb-20 sm:pt-28 lg:flex-row lg:gap-16">
         <SectionHeading
           eyebrow="Who can apply"
           title="Is this scholarship for you?"
@@ -272,6 +273,16 @@ function Eligibility() {
             </li>
           ))}
         </ul>
+      </Container>
+      <Container
+        id="check-eligibility"
+        size="narrow"
+        className="scroll-mt-24 pb-16 sm:pb-28"
+      >
+        <h3 className="mb-6 text-center font-display text-2xl font-bold text-forest-900 sm:text-[28px]">
+          Not sure? Check in under a minute.
+        </h3>
+        <EligibilityChecker />
       </Container>
     </section>
   )
