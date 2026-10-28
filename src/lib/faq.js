@@ -57,9 +57,9 @@ export const faqGroups = [
         ],
       },
       {
-        question: 'I am in my second or third year. Can I still apply?',
+        question: 'I am in my second, third or fourth year. Can I still apply?',
         answer: [
-          'Yes. The scholarship is awarded one year at a time, and students apply each year with their latest results.',
+          'Yes. Students in any year of their programme can apply, including those who already received the scholarship last year. Apply again each year with your updated CGPA and latest results.',
         ],
       },
       {
@@ -117,7 +117,7 @@ export const faqGroups = [
       },
       {
         question: 'Do I need an affidavit or stamp paper?',
-        answer: ['No. You don’t need an affidavit or stamp paper to apply.'],
+        answer: ['No. No affidavit or stamp paper is required.'],
       },
     ],
   },
@@ -137,6 +137,12 @@ export const faqGroups = [
           intake.open
             ? `The last date for the ${intake.year} intake is ${intake.deadlineLabel}.`
             : 'Applications are currently closed. Keep an eye on our news page for the next intake.',
+        ],
+      },
+      {
+        question: 'Can I apply from my phone?',
+        answer: [
+          'Yes. The application portal works on phones, so you can apply from your smartphone. You don’t need a computer.',
         ],
       },
       {
@@ -198,7 +204,7 @@ export const faqGroups = [
       {
         question: 'How is the money paid?',
         answer: [
-          'The scholarship is paid to the student, into any valid bank account, JazzCash or Easypaisa account.',
+          'The scholarship is paid into a valid account in your guardian’s name: a bank account, JazzCash or Easypaisa. Make sure your guardian has one of these ready.',
         ],
       },
       {
