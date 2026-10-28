@@ -33,7 +33,7 @@ export function Logo({ className, onDark = false, ...props }) {
       <span className="flex flex-col items-stretch gap-1">
         <span
           className={clsx(
-            'font-brand text-[24px] font-bold leading-none tracking-[0.06em] sm:text-[27px]',
+            'pl-[0.06em] text-center font-brand text-[24px] font-bold leading-none tracking-[0.06em] sm:text-[27px]',
             onDark ? 'text-white' : 'text-forest-900',
           )}
         >
@@ -49,7 +49,7 @@ export function Logo({ className, onDark = false, ...props }) {
             aria-hidden="true"
             className="h-px w-2.5 flex-none bg-current"
           />
-          Talent Scholarship
+          <span className="-mr-[0.2em]">Talent Scholarship</span>
           <span
             aria-hidden="true"
             className="h-px w-2.5 flex-none bg-current"
