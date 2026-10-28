@@ -16,7 +16,7 @@ const navigation = [
   { href: '/scholarship', label: 'Scholarship' },
   { href: '/scholarship#criteria', label: 'Eligibility' },
   { href: '/articles', label: 'News' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/faq', label: 'FAQ' },
 ]
 
 function isActive(pathname, href) {

@@ -1,6 +1,8 @@
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { DaysLeft } from '@/components/DaysLeft'
+import { DocumentsChecklist } from '@/components/DocumentsChecklist'
+import { FraudNotice } from '@/components/FraudNotice'
 import { ArrowRightIcon, WhatsAppIcon } from '@/components/Icons'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { intake, site, whatsappHref } from '@/lib/site'
@@ -35,25 +37,29 @@ export default function Apply() {
         intro={`Applications are open until ${intake.deadlineLabel}. The whole application happens online.`}
       />
       <Container className="flex flex-col gap-12 py-16 sm:py-24 lg:flex-row lg:items-start lg:gap-16">
-        <ol className="flex flex-1 flex-col gap-3">
-          {steps.map((step, index) => (
-            <li
-              key={step}
-              className="flex items-center gap-4 rounded-2xl bg-forest-50 px-5 py-4 text-[17px]"
-            >
-              <span
-                className={
-                  index === steps.length - 1
-                    ? 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-gold font-display font-extrabold text-ink-on'
-                    : 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-forest-900 font-display font-extrabold text-white'
-                }
+        <div className="flex min-w-0 flex-1 flex-col gap-8">
+          <ol className="flex flex-col gap-3">
+            {steps.map((step, index) => (
+              <li
+                key={step}
+                className="flex items-center gap-4 rounded-2xl bg-forest-50 px-5 py-4 text-[17px]"
               >
-                {index + 1}
-              </span>
-              {step}
-            </li>
-          ))}
-        </ol>
+                <span
+                  className={
+                    index === steps.length - 1
+                      ? 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-gold font-display font-extrabold text-ink-on'
+                      : 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-forest-900 font-display font-extrabold text-white'
+                  }
+                >
+                  {index + 1}
+                </span>
+                {step}
+              </li>
+            ))}
+          </ol>
+          <DocumentsChecklist />
+          <FraudNotice />
+        </div>
         <div className="flex w-full flex-col gap-4 rounded-3xl bg-forest-900 p-7 text-forest-100 lg:w-[360px] lg:flex-none">
           <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
             Deadline

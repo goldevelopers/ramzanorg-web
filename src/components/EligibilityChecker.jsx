@@ -13,26 +13,53 @@ import {
 import { intake, site, whatsappHref } from '@/lib/site'
 
 // Questions follow the published eligibility criteria. They are a quick
-// guide only: the scholarship team makes the final decision.
+// guide only: the scholarship team makes the final decision. An option
+// marked `blocks` ends the checker with a "not eligible" result.
 const questions = [
+  {
+    id: 'level',
+    title: 'What will you be studying?',
+    options: [
+      { value: 'diploma', label: 'A diploma or DAE' },
+      { value: 'bachelors', label: 'A bachelor’s degree (BS, BA, BSc, etc.)' },
+      { value: 'masters', label: 'A master’s degree' },
+      {
+        value: 'school',
+        label: 'Intermediate (FA/FSc) or school',
+        blocks: true,
+      },
+    ],
+  },
   {
     id: 'admission',
     title:
-      'Have you secured admission at a recognised college or university in Pakistan?',
+      'Have you secured admission at a recognised institution in Pakistan?',
     options: [
       { value: 'yes', label: 'Yes, I have admission' },
       { value: 'waiting', label: 'Not yet, I’m waiting for admission' },
+      { value: 'no', label: 'No', blocks: true },
+    ],
+  },
+  {
+    id: 'other',
+    title:
+      'Are you already receiving a scholarship from another institution or organisation?',
+    options: [
       { value: 'no', label: 'No' },
+      {
+        value: 'yes',
+        label: 'Yes, I already have a scholarship',
+        blocks: true,
+      },
     ],
   },
   {
     id: 'need',
-    title:
-      'Is it difficult for you or your family to pay your tuition and study costs?',
+    title: 'Is it difficult for you or your family to pay your tuition fees?',
     options: [
-      { value: 'yes', label: 'Yes, we can’t cover the costs' },
+      { value: 'yes', label: 'Yes, we can’t cover the fees' },
       { value: 'partly', label: 'We can cover some, but not all' },
-      { value: 'no', label: 'No, we can afford them' },
+      { value: 'no', label: 'No, we can afford them', blocks: true },
     ],
   },
   {
@@ -44,31 +71,35 @@ const questions = [
       { value: 'low', label: 'Below average' },
     ],
   },
-  {
-    id: 'goals',
-    title: 'Do you know how your studies will help your long-term goals?',
-    options: [
-      { value: 'yes', label: 'Yes, I have a clear plan' },
-      { value: 'somewhat', label: 'I have some idea' },
-      { value: 'no', label: 'Not yet' },
-    ],
-  },
 ]
 
+const notEligible = {
+  level: {
+    title: 'This level of study isn’t covered',
+    body: 'The scholarship supports diploma (including DAE), bachelor’s and master’s students. It doesn’t cover school or intermediate (FA/FSc) education. You’re welcome to apply once you start a diploma or degree.',
+  },
+  admission: {
+    title: 'Secure your admission first',
+    body: 'The scholarship supports students who already have admission at a recognised institution in Pakistan. Once you have your admission, come back and check again.',
+  },
+  other: {
+    title: 'You can’t hold two scholarships',
+    body: 'Students who already receive a scholarship from another institution or organisation aren’t eligible. If your current scholarship ends, you’re welcome to apply.',
+  },
+  need: {
+    title: 'This scholarship may not be the right fit',
+    body: 'The Ramzan Talent Scholarship gives priority to students from families with lower incomes, so students who can afford their fees are unlikely to be selected.',
+  },
+}
+
 function getResult(answers) {
-  if (answers.admission === 'no') {
-    return {
-      tone: 'no',
-      title: 'Secure your admission first',
-      body: 'The scholarship supports students who already have admission at a recognised college or university in Pakistan. Once you have your admission, come back and check again.',
-    }
-  }
-  if (answers.need === 'no') {
-    return {
-      tone: 'no',
-      title: 'This scholarship may not be the right fit',
-      body: 'The Ramzan Talent Scholarship is for students who face financial difficulty continuing their education, so students who can afford their studies are unlikely to be selected.',
-    }
+  let blocked = questions.find((question) =>
+    question.options.some(
+      (option) => option.blocks && answers[question.id] === option.value,
+    ),
+  )
+  if (blocked) {
+    return { tone: 'no', ...notEligible[blocked.id] }
   }
 
   let tips = []
@@ -79,20 +110,18 @@ function getResult(answers) {
   }
   if (answers.merit !== 'strong') {
     tips.push(
-      'Financial need comes first, but results are also considered, so describe your effort and progress in your application.',
+      'There’s no minimum percentage, but selection weighs your results alongside your financial need, so describe your effort and progress in your application.',
     )
   }
-  if (answers.goals !== 'yes') {
-    tips.push(
-      'Before you apply, think about what you want to achieve with your degree. A clear goal strengthens your application.',
-    )
-  }
+  tips.push(
+    'Girls and orphan students are given preference, so mention it in your application if this applies to you.',
+  )
 
   if (answers.admission === 'waiting') {
     return {
       tone: 'maybe',
       title: 'You can apply once you’re admitted',
-      body: 'You match the scholarship’s focus on financial need. As soon as your admission is confirmed, you’ll be ready to apply.',
+      body: 'You match what the scholarship looks for. As soon as your admission is confirmed, you’ll be ready to apply.',
       tips,
     }
   }
@@ -114,6 +143,8 @@ const toneStyles = {
 export function EligibilityChecker({ className }) {
   let [step, setStep] = useState(0)
   let [answers, setAnswers] = useState({})
+  // The questions shown so far, so Back retraces the student's own path
+  let [history, setHistory] = useState([])
   let headingRef = useRef(null)
   let baseId = useId()
 
@@ -126,29 +157,23 @@ export function EligibilityChecker({ className }) {
     requestAnimationFrame(() => headingRef.current?.focus())
   }
 
-  function choose(value) {
-    let next = { ...answers, [question.id]: value }
-    setAnswers(next)
+  function choose(option) {
+    setAnswers({ ...answers, [question.id]: option.value })
+    setHistory([...history, step])
     // A blocking answer goes straight to the result
-    let blocked =
-      (question.id === 'admission' && value === 'no') ||
-      (question.id === 'need' && value === 'no')
-    setStep(blocked ? questions.length : step + 1)
+    setStep(option.blocks ? questions.length : step + 1)
     focusHeading()
   }
 
   function back() {
-    // Step back to the last question that was answered (blocking answers skip ahead)
-    let previous = Math.min(step, questions.length) - 1
-    while (previous > 0 && answers[questions[previous].id] === undefined) {
-      previous--
-    }
-    setStep(Math.max(previous, 0))
+    setStep(history.length > 0 ? history[history.length - 1] : 0)
+    setHistory(history.slice(0, -1))
     focusHeading()
   }
 
   function restart() {
     setAnswers({})
+    setHistory([])
     setStep(0)
     focusHeading()
   }
@@ -168,7 +193,7 @@ export function EligibilityChecker({ className }) {
             Eligibility checker
           </p>
           <p className="text-[15px] text-ink-600">
-            Four quick questions. Takes under a minute.
+            Five quick questions. Takes under a minute.
           </p>
         </div>
         <p className="text-sm font-medium text-ink-500" aria-live="polite">
@@ -216,7 +241,7 @@ export function EligibilityChecker({ className }) {
                     key={option.value}
                     type="button"
                     aria-pressed={selected}
-                    onClick={() => choose(option.value)}
+                    onClick={() => choose(option)}
                     className={clsx(
                       'flex min-h-[56px] w-full items-center gap-4 rounded-2xl border px-5 py-3.5 text-left text-[16px] font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700',
                       selected
@@ -253,14 +278,19 @@ export function EligibilityChecker({ className }) {
             )}
           </div>
         ) : (
-          <Result result={result} headingRef={headingRef} onRestart={restart} />
+          <Result
+            result={result}
+            headingRef={headingRef}
+            onBack={back}
+            onRestart={restart}
+          />
         )}
       </div>
     </div>
   )
 }
 
-function Result({ result, headingRef, onRestart }) {
+function Result({ result, headingRef, onBack, onRestart }) {
   let tone = toneStyles[result.tone]
   let Icon = tone.icon
   let canApply = intake.open && result.tone !== 'no'
@@ -323,6 +353,14 @@ function Result({ result, headingRef, onRestart }) {
           Start again
         </Button>
       </div>
+
+      <button
+        type="button"
+        onClick={onBack}
+        className="self-start py-1 text-[15px] font-semibold text-forest-700 hover:text-forest-900"
+      >
+        ← Change my last answer
+      </button>
 
       <p className="text-sm text-ink-500">
         This checker is a quick guide, not a decision. Every application is

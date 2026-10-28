@@ -1,7 +1,9 @@
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { EligibilityChecker } from '@/components/EligibilityChecker'
+import { FaqAnswer } from '@/components/FaqAnswer'
 import { Eyebrow, SectionHeading } from '@/components/SectionHeading'
+import { faqGroups } from '@/lib/faq'
 import { intake, site, whatsappHref } from '@/lib/site'
 
 export const metadata = {
@@ -14,41 +16,40 @@ const criteria = [
   {
     title: 'Secured admission',
     description:
-      'You must have secured admission in a recognised college or university within Pakistan.',
+      'You must have admission to a diploma (including DAE), bachelor’s or master’s programme at a recognised institution in Pakistan.',
   },
   {
     title: 'Financial need',
     description:
-      'You face financial difficulty continuing your education and can show you lack the funds for tuition and other expenses.',
+      'You face financial difficulty continuing your education. There is no fixed income limit, but priority goes to families with lower incomes.',
   },
   {
     title: 'Academic merit',
     description:
-      'A strong academic record that reflects your dedication and potential for success.',
+      'Your results matter. There is no minimum percentage, but selection weighs your academic record alongside your financial need.',
   },
   {
     title: 'Commitment to education',
     description:
       'A genuine commitment to your studies and a clear idea of how your education will help you reach your long-term goals.',
   },
+  {
+    title: 'No other scholarship',
+    description:
+      'You must not already be receiving a scholarship from another institution or organisation.',
+  },
 ]
 
-const faqs = [
-  {
-    question: 'When is the last date to apply?',
-    answer: intake.open
-      ? `Applications for ${intake.year} close on ${intake.deadlineLabel}.`
-      : 'Applications are currently closed. Keep an eye on our news page for the next intake.',
-  },
-  {
-    question: 'How do I apply?',
-    answer: `Create an account and submit your application online at ${site.applyHost}.`,
-  },
-  {
-    question: 'Who funds the scholarship?',
-    answer: 'The Qazi Family personally funds the Ramzan Talent Scholarship.',
-  },
+// A few of the most asked questions; the rest live on /faq
+const faqQuestions = [
+  'Who can apply for the Ramzan Talent Scholarship?',
+  'What documents do I need?',
+  'Is there any fee to apply?',
+  'What does the scholarship cover, and how much is it?',
 ]
+const faqs = faqGroups
+  .flatMap((group) => group.items)
+  .filter((item) => faqQuestions.includes(item.question))
 
 function Hero() {
   return (
@@ -141,8 +142,8 @@ function Criteria() {
           className="lg:w-[340px] lg:flex-none"
         >
           <p className="text-[17px] text-ink-600">
-            The primary focus is financial need. Academic performance is also
-            considered in selection.
+            Selection weighs both academic results and financial need. Girls and
+            orphan students are given preference.
           </p>
         </SectionHeading>
         <ol className="flex flex-1 flex-col gap-4">
@@ -203,27 +204,25 @@ function Faq() {
                   +
                 </span>
               </summary>
-              <p className="mt-3 text-ink-600">{faq.answer}</p>
+              <FaqAnswer blocks={faq.answer} />
             </details>
           ))}
         </div>
-        <p className="text-center text-ink-600">
-          Still have a question? Email{' '}
-          <a
-            href={`mailto:${site.email}`}
-            className="font-semibold text-forest-700 hover:text-forest-900"
-          >
-            {site.email}
-          </a>{' '}
-          or{' '}
-          <a
-            href={whatsappHref()}
-            className="font-semibold text-forest-700 hover:text-forest-900"
-          >
-            message us on WhatsApp
-          </a>
-          .
-        </p>
+        <div className="flex flex-col items-center gap-3 text-center">
+          <Button href="/faq" variant="secondary" size="md" className="py-3.5">
+            See all questions
+          </Button>
+          <p className="text-ink-600">
+            Still have a question?{' '}
+            <a
+              href={whatsappHref()}
+              className="font-semibold text-forest-700 hover:text-forest-900"
+            >
+              Message us on WhatsApp
+            </a>
+            .
+          </p>
+        </div>
       </Container>
     </section>
   )
