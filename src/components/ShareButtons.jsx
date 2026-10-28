@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { ChatIcon, FacebookIcon, LinkIcon } from '@/components/Icons'
+import { WhatsAppIcon, FacebookIcon, LinkIcon } from '@/components/Icons'
 
 const buttonClass =
   'inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-semibold text-forest-900 ring-1 ring-inset ring-forest-300 transition hover:bg-forest-50'
@@ -37,7 +37,7 @@ export function ShareButtons({ title }) {
           rel="noopener noreferrer"
           className={buttonClass}
         >
-          <ChatIcon className="h-[18px] w-[18px]" />
+          <WhatsAppIcon className="h-[18px] w-[18px]" />
           WhatsApp
         </a>
         <a

@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque, Inter } from 'next/font/google'
+import { Bricolage_Grotesque, Cinzel, Inter } from 'next/font/google'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
@@ -16,6 +16,14 @@ const display = Bricolage_Grotesque({
   weight: ['500', '700', '800'],
   display: 'swap',
   variable: '--font-display',
+})
+
+// Classic serif for the wordmark, echoing the lettering in the logo
+const brand = Cinzel({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  display: 'swap',
+  variable: '--font-brand',
 })
 
 export const metadata = {
@@ -40,7 +48,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`h-full scroll-smooth antialiased ${inter.variable} ${display.variable}`}
+      className={`h-full scroll-smooth antialiased ${inter.variable} ${display.variable} ${brand.variable}`}
     >
       <body className="flex min-h-full bg-white font-sans text-base text-ink">
         <Providers>
