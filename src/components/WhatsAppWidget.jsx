@@ -1,5 +1,6 @@
+import { whatsappHref } from '@/lib/site'
+
 // Mirrors the WhatsApp button on apply.ramzan.org.pk
-const WHATSAPP_NUMBER = '923316204332'
 const WHATSAPP_MESSAGE = 'Hi! I need help with the Ramzan Scholarship.'
 
 function WhatsAppIcon(props) {
@@ -14,11 +15,9 @@ function WhatsAppIcon(props) {
 }
 
 export function WhatsAppWidget() {
-  let href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
-
   return (
     <a
-      href={href}
+      href={whatsappHref(WHATSAPP_MESSAGE)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

@@ -1,130 +1,187 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
-
+import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
-
-function SocialLink({ className, href, children, icon: Icon }) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
+import { Eyebrow } from '@/components/SectionHeading'
+import { intake, site } from '@/lib/site'
 
 export const metadata = {
   title: 'About',
   description:
-    'I’m Spencer Sharp. I live in New York City, where I design the future.',
+    'The story of the Ramzan Talent Scholarship: from the Ramzan Welfare Society in Gujrat to a decade-long commitment to education in Pakistan.',
 }
+
+const people = [
+  {
+    initials: 'QR',
+    name: 'Qazi Muhammad Ramzan',
+    role: 'In whose memory the scholarship is named',
+  },
+  {
+    initials: 'MA',
+    name: 'Muhammad Asghar Qazi',
+    role: 'Founder, Ramzan Welfare Society',
+  },
+  {
+    initials: 'PA',
+    name: 'Parveen Afza (Late)',
+    role: 'Co-founder of the family’s welfare work',
+  },
+  {
+    initials: 'QF',
+    name: 'The Qazi Family',
+    role: 'Today run by the sons of Muhammad Asghar Qazi',
+    highlight: true,
+  },
+]
+
+const timeline = [
+  {
+    when: 'Early years',
+    title: 'Ramzan Welfare Society',
+    description: 'Library and community hall built in Gujrat.',
+  },
+  {
+    when: '2012',
+    title: 'Scholarship founded',
+    description: 'First students supported through college and university.',
+  },
+  {
+    when: '2012–2024',
+    title: 'A decade of support',
+    description:
+      'Hundreds of students helped to continue their studies since 2012.',
+  },
+  {
+    when: String(intake.year),
+    title: 'Applications online',
+    description: `Students apply digitally at ${site.applyHost}.`,
+  },
+]
 
 export default function About() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-        <div className="lg:pl-20">
-          <div className="max-w-xs px-2.5 lg:max-w-none">
-            <Image
-              src={portraitImage}
-              alt=""
-              sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-            />
-          </div>
-        </div>
-        <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            From Humble Beginnings to Lasting Impact: The Legacy of the Ramzan Talent Scholarship
+    <>
+      <section className="bg-forest-50">
+        <Container className="flex flex-col items-center gap-6 pb-16 pt-16 text-center sm:pb-[88px] sm:pt-[104px]">
+          <Eyebrow>Our story</Eyebrow>
+          <h1 className="max-w-[940px] font-display text-[clamp(2.625rem,5.5vw,4.5rem)] font-extrabold leading-[1.03] tracking-display text-forest-900">
+            From humble beginnings to lasting impact.
           </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <p>
-            The Ramzan Talent Scholarship has its roots in the deep commitment of the 
-            Qazi Family to education and community welfare. Our journey began long 
-            before the scholarship was officially established in 2012. In the early years, 
-            the Ramzan Welfare Society, under the leadership of <em>Muhammad Asghar Qazi</em>, 
-            was actively involved in various community initiatives in our hometown of Gujrat, 
-            Pakistan. The Society set up a library and a community hall, creating 
-            a space for learning and growth in the local community.
+          <p className="max-w-[680px] text-lg text-ink-600 sm:text-[19px]">
+            The Ramzan Talent Scholarship grew out of one family’s deep
+            commitment to education and community welfare in Gujrat, Pakistan.
+          </p>
+        </Container>
+      </section>
+
+      <section>
+        <Container className="flex flex-col gap-14 py-16 sm:py-[104px] lg:flex-row lg:gap-16">
+          <div className="flex min-w-0 flex-[3] flex-col gap-6 text-lg text-ink-700">
+            <p className="font-display text-[22px] font-medium leading-[1.45] text-forest-900 sm:text-[26px]">
+              Our journey began long before the scholarship was officially
+              established in 2012.
             </p>
             <p>
-            This initiative was deeply personal for <em>Muhammad Asghar Qazi</em>, who dedicated it 
-            to the memory of his father, Qazi Muhammad Ramzan, and was supported tirelessly 
-            by his sister, <em>Parveen Afza</em> (Late). Their shared vision was to uplift 
-            the community through education and access to resources, planting 
-            the seeds for what would later become the Ramzan Talent Scholarship.
+              In the early years, the Ramzan Welfare Society, under the
+              leadership of Muhammad Asghar Qazi, was active in community
+              initiatives in our hometown of Gujrat. The Society set up a
+              library and a community hall, creating a space for learning and
+              growth.
             </p>
             <p>
-            The Ramzan Talent Scholarship was born out of a desire to extend this 
-            vision beyond the local community. Starting modestly in 2012, 
-            we began by supporting a small group of students who faced 
-            financial difficulties in continuing their college and university 
-            education. What started as a small effort has grown into a 
-            decade-long commitment to education in Pakistan.
+              The work was deeply personal. Muhammad Asghar Qazi dedicated it to
+              the memory of his father, Qazi Muhammad Ramzan, and was supported
+              tirelessly by his sister, Parveen Afza (Late). Their shared vision
+              was to uplift the community through education and access to
+              resources.
             </p>
             <p>
-            Our mission is simple yet profound: to ensure that no talented student 
-            is forced to abandon their academic dreams due to financial constraints. 
-            The Qazi Family personally funds this scholarship, continuing the 
-            legacy of community service that began with the Ramzan Welfare Society. 
-            We believe that education is the key to a brighter future, not just for 
-            individuals but for the nation as a whole.
+              In 2012 that vision reached beyond Gujrat. We began by supporting
+              a small group of students facing financial difficulty in college
+              and university. What started as a small effort has become a
+              decade-long commitment to education in Pakistan.
             </p>
             <p>
-            Today, the Ramzan Talent Scholarship is managed by the sons of <em>Muhammad Asghar Qazi</em>, 
-            who have taken up the mantle to continue this noble cause. 
-            Their dedication to promoting education and nurturing talent reflects the values 
-            instilled in them by their father and aunt. The scholarship stands as a 
-            testament to the enduring legacy of Qazi Muhammad Ramzan and <em>Parveen Afza</em>, 
-            and the unwavering commitment of the Qazi Family to making a 
-            difference in the lives of young students across Pakistan.
-            </p>
-            <p>
-            As we look to the future, our commitment remains as strong as ever. 
-            We are proud to carry forward this mission, helping more students 
-            achieve their educational goals and empowering the next generation 
-            of leaders in Pakistan.
+              Today, the scholarship is managed by the sons of Muhammad Asghar
+              Qazi, and the Qazi Family continues to fund it personally,
+              carrying forward the legacy of Qazi Muhammad Ramzan and Parveen
+              Afza.
             </p>
           </div>
-        </div>
-        <div className="lg:pl-20">
-          <ul role="list">
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-              Follow on Instagram
-            </SocialLink>
-            <SocialLink
-              href="mailto:scholarship@ramzan.org.pk"
-              icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-            >
-              scholarship@ramzan.org.pk
-            </SocialLink>
-          </ul>
-        </div>
-      </div>
-    </Container>
+          <aside className="flex min-w-0 flex-[2] flex-col gap-4">
+            <Eyebrow>The people behind it</Eyebrow>
+            <ul className="flex flex-col gap-4">
+              {people.map((person) => (
+                <li
+                  key={person.name}
+                  className="flex items-center gap-4 rounded-[20px] bg-forest-50 p-6"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={
+                      person.highlight
+                        ? 'flex h-14 w-14 flex-none items-center justify-center rounded-full bg-gold font-display text-xl font-extrabold text-forest-900'
+                        : 'flex h-14 w-14 flex-none items-center justify-center rounded-full bg-forest-900 font-display text-xl font-extrabold text-gold'
+                    }
+                  >
+                    {person.initials}
+                  </span>
+                  <span className="flex flex-col">
+                    <strong className="font-semibold text-forest-900">
+                      {person.name}
+                    </strong>
+                    <span className="text-[15px] text-ink-500">
+                      {person.role}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </Container>
+      </section>
+
+      <section className="bg-forest-900 text-forest-100">
+        <Container className="flex flex-col gap-14 py-16 sm:py-[104px]">
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.08] tracking-heading text-white">
+            A legacy, step by step
+          </h2>
+          <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {timeline.map((item) => (
+              <li
+                key={item.title}
+                className="flex flex-col gap-2.5 border-t-[3px] border-gold pt-6"
+              >
+                <span className="font-display text-[26px] font-extrabold text-gold">
+                  {item.when}
+                </span>
+                <strong className="text-lg text-white">{item.title}</strong>
+                <span className="text-forest-500">{item.description}</span>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <section>
+        <Container
+          size="narrow"
+          className="flex flex-col items-center gap-7 py-16 text-center sm:py-28"
+        >
+          <Eyebrow>Our mission</Eyebrow>
+          <p className="font-display text-[clamp(1.75rem,3.4vw,2.625rem)] font-bold leading-[1.25] tracking-[-0.02em] text-forest-900">
+            To ensure that no talented student is forced to abandon their
+            academic dreams because of financial constraints.
+          </p>
+          <div className="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+            {intake.open && (
+              <Button href={site.applyUrl}>Apply for {intake.year}</Button>
+            )}
+            <Button href={`mailto:${site.email}`} variant="secondary">
+              Get in touch
+            </Button>
+          </div>
+        </Container>
+      </section>
+    </>
   )
 }

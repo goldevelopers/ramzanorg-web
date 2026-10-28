@@ -1,102 +1,230 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
-
+import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
-
-function SocialLink({ className, href, children, icon: Icon }) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
+import { Eyebrow, SectionHeading } from '@/components/SectionHeading'
+import { intake, site, whatsappHref } from '@/lib/site'
 
 export const metadata = {
-  title: 'Scholarship'
+  title: 'Scholarship',
+  description:
+    'Who can apply for the Ramzan Talent Scholarship, what we look for, and how to apply.',
+}
+
+const criteria = [
+  {
+    title: 'Secured admission',
+    description:
+      'You must have secured admission in a recognised college or university within Pakistan.',
+  },
+  {
+    title: 'Financial need',
+    description:
+      'You face financial difficulty continuing your education and can show you lack the funds for tuition and other expenses.',
+  },
+  {
+    title: 'Academic merit',
+    description:
+      'A strong academic record that reflects your dedication and potential for success.',
+  },
+  {
+    title: 'Commitment to education',
+    description:
+      'A genuine commitment to your studies and a clear idea of how your education will help you reach your long-term goals.',
+  },
+]
+
+const faqs = [
+  {
+    question: 'When is the last date to apply?',
+    answer: intake.open
+      ? `Applications for ${intake.year} close on ${intake.deadlineLabel}.`
+      : 'Applications are currently closed. Keep an eye on our news page for the next intake.',
+  },
+  {
+    question: 'How do I apply?',
+    answer: `Create an account and submit your application online at ${site.applyHost}.`,
+  },
+  {
+    question: 'Who funds the scholarship?',
+    answer: 'The Qazi Family personally funds the Ramzan Talent Scholarship.',
+  },
+]
+
+function Hero() {
+  return (
+    <section className="bg-forest-900 text-forest-100">
+      <Container className="flex flex-col gap-12 py-16 sm:py-24 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex max-w-[680px] flex-col gap-5">
+          <Eyebrow onDark>The scholarship</Eyebrow>
+          <h1 className="font-display text-[clamp(2.625rem,5.5vw,4.25rem)] font-extrabold leading-[1.03] tracking-display text-white">
+            Unlocking potential, not just paying fees.
+          </h1>
+          <p className="max-w-[600px] text-lg text-forest-500 sm:text-[19px]">
+            Scholarships aren’t just financial aid. They’re a bridge to a
+            brighter future, and a chance for every student to fulfil their
+            potential, whatever their circumstances.
+          </p>
+        </div>
+        {intake.open && (
+          <div className="flex w-full flex-col gap-3.5 rounded-3xl border border-forest-100/20 bg-white/5 p-7 lg:w-[340px] lg:flex-none">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
+              {intake.year} intake
+            </p>
+            <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2.5 text-[15px]">
+              <dt className="text-forest-400">Status</dt>
+              <dd className="font-semibold text-white">Open</dd>
+              <dt className="text-forest-400">Deadline</dt>
+              <dd className="font-semibold text-white">
+                {intake.deadlineLabel}
+              </dd>
+              <dt className="text-forest-400">Apply at</dt>
+              <dd className="font-semibold text-white">{site.applyHost}</dd>
+            </dl>
+            <Button
+              href={site.applyUrl}
+              variant="gold"
+              size="md"
+              className="mt-1.5 py-3.5"
+            >
+              Start application
+            </Button>
+          </div>
+        )}
+      </Container>
+    </section>
+  )
+}
+
+function WhyItMatters() {
+  return (
+    <section>
+      <Container className="flex flex-col gap-12 py-16 sm:py-28">
+        <SectionHeading
+          eyebrow="Why scholarships matter"
+          title="Too many students stop because of cost, not ability."
+          className="max-w-[680px]"
+        />
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="flex flex-col gap-3.5 rounded-3xl bg-forest-50 p-7 sm:p-9">
+            <h3 className="font-display text-2xl font-bold text-forest-900">
+              For the student
+            </h3>
+            <p className="text-ink-600">
+              Tuition, books and other expenses can force students to postpone
+              or abandon their studies. Financial support lets them focus on
+              learning, excel academically and build successful careers.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3.5 rounded-3xl bg-forest-50 p-7 sm:p-9">
+            <h3 className="font-display text-2xl font-bold text-forest-900">
+              For the community
+            </h3>
+            <p className="text-ink-600">
+              Scholarships promote equal access to education, so talented people
+              from all walks of life can reach their goals, strengthening
+              communities and the country as a whole.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function Criteria() {
+  return (
+    <section id="criteria" className="scroll-mt-24 bg-forest-50">
+      <Container className="flex flex-col gap-12 py-16 sm:py-28 lg:flex-row lg:gap-16">
+        <SectionHeading
+          eyebrow="Eligibility criteria"
+          title="What we look for"
+          className="lg:w-[340px] lg:flex-none"
+        >
+          <p className="text-[17px] text-ink-600">
+            The primary focus is financial need. Academic performance is also
+            considered in selection.
+          </p>
+        </SectionHeading>
+        <ol className="flex flex-1 flex-col gap-4">
+          {criteria.map((item, index) => (
+            <li
+              key={item.title}
+              className="flex items-start gap-5 rounded-[20px] border border-line bg-white p-6 sm:gap-6 sm:p-7"
+            >
+              <span className="font-display text-3xl font-extrabold leading-none text-gold sm:text-4xl">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="flex flex-col gap-1.5">
+                <strong className="font-display text-[21px] font-bold text-forest-900">
+                  {item.title}
+                </strong>
+                <span className="text-ink-600">{item.description}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </section>
+  )
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="scroll-mt-24">
+      <Container size="narrow" className="flex flex-col gap-10 py-16 sm:py-28">
+        <SectionHeading
+          eyebrow="Questions"
+          title="Frequently asked"
+          className="items-center text-center"
+        />
+        <div className="flex flex-col border-t border-line">
+          {faqs.map((faq, index) => (
+            <details
+              key={faq.question}
+              open={index === 0}
+              className="group border-b border-line px-1 py-6"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold text-forest-900 [&::-webkit-details-marker]:hidden">
+                {faq.question}
+                <span
+                  aria-hidden="true"
+                  className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-forest-100 text-forest-700 transition group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-ink-600">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+        <p className="text-center text-ink-600">
+          Still have a question? Email{' '}
+          <a
+            href={`mailto:${site.email}`}
+            className="font-semibold text-forest-700 hover:text-forest-900"
+          >
+            {site.email}
+          </a>{' '}
+          or{' '}
+          <a
+            href={whatsappHref()}
+            className="font-semibold text-forest-700 hover:text-forest-900"
+          >
+            message us on WhatsApp
+          </a>
+          .
+        </p>
+      </Container>
+    </section>
+  )
 }
 
 export default function Scholarship() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-        <div className="lg:pl-20">
-          <div className="max-w-xs px-2.5 lg:max-w-none">
-            <Image
-              src={portraitImage}
-              alt=""
-              sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-            />
-          </div>
-        </div>
-        <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Unlocking Potential: The Power of Scholarships
-          </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <p>
-            At the Ramzan Talent Scholarship, we believe that every student deserves the opportunity to pursue their education, regardless of their financial circumstances. Scholarships are not just financial aid; they are a bridge to a brighter future, offering students the chance to fulfill their potential and contribute meaningfully to society.
-            </p>
-            <h2 className='font-bold'>Why Scholarships Matter</h2>
-            <p>
-            For many students, the path to higher education is fraught with financial challenges. The cost of tuition, books, and other expenses can be overwhelming, often leading to the difficult decision of postponing or even abandoning their educational dreams. Scholarships like the Ramzan Talent Scholarship play a crucial role in alleviating this burden. By providing financial support, we help students focus on their studies, excel academically, and ultimately build successful careers.
-            </p>
-            <p>
-            Scholarships also have a broader impact. They promote equal access to education, ensuring that talented individuals from all walks of life have the chance to achieve their goals. This not only benefits the individual students but also strengthens communities and contributes to the overall development of society. In short, scholarships are an investment in the future—a future where education is accessible to all.
-            </p>
-            <h2 className='font-bold'>Eligibility Criteria</h2>
-            <p>
-            The Ramzan Talent Scholarship is open to students who meet the following criteria:
-                <ul class="list-disc">
-                    <li><strong>Secured Admission:</strong> Applicants must have secured admission in a recognized college or university within Pakistan.</li>
-                    <li><strong>Financial Need:</strong> The scholarship is intended for students who face financial difficulties in continuing their education. Applicants should be able to demonstrate that they lack the necessary funds to cover their tuition and other educational expenses.</li>
-                    <li><strong>Academic Merit:</strong> While the primary focus is on financial need, academic performance will also be considered in the selection process. Applicants should have a strong academic record, reflecting their dedication and potential for success.</li>
-                    <li><strong>Commitment to Education:</strong> Candidates should exhibit a genuine commitment to their studies and a clear understanding of how their education will help them achieve their long-term goals.</li>
-                </ul>
-                If you meet these criteria, we encourage you to apply for the Ramzan Talent Scholarship. We are here to support you in your educational journey and help you unlock the doors to a brighter future.
-            </p>
-          </div>
-        </div>
-        <div className="lg:pl-20">
-          <ul role="list">
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-              Follow on Instagram
-            </SocialLink>
-            <SocialLink
-              href="mailto:scholarship@ramzan.org.pk"
-              icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-            >
-              scholarship@ramzan.org.pk
-            </SocialLink>
-          </ul>
-        </div>
-      </div>
-    </Container>
+    <>
+      <Hero />
+      <WhyItMatters />
+      <Criteria />
+      <Faq />
+    </>
   )
 }

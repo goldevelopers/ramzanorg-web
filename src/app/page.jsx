@@ -1,310 +1,405 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { ApplicationsPopup } from '@/components/ApplicationsPopup'
+import { ArticleCard } from '@/components/ArticleCard'
 import { Button } from '@/components/Button'
-import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import { DaysLeft } from '@/components/DaysLeft'
 import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
+  ArrowRightIcon,
+  BuildingIcon,
+  CapIcon,
+  ChatIcon,
+  CheckIcon,
+  StarIcon,
+  TargetIcon,
+  WalletIcon,
+} from '@/components/Icons'
+import { Eyebrow, SectionHeading } from '@/components/SectionHeading'
+import heroImage from '@/images/photos/image-1.jpg'
 import { getAllArticles } from '@/lib/articles'
-import { formatDate } from '@/lib/formatDate'
+import { intake, site, whatsappHref } from '@/lib/site'
 
-function MailIcon(props) {
+const stats = [
+  { value: '2012', label: 'First scholarships awarded' },
+  { value: 'Hundreds', label: 'Of students helped to continue their studies' },
+  { value: '100%', label: 'Funded personally by the Qazi Family' },
+  { value: 'Online', label: 'Apply from anywhere in Pakistan' },
+]
+
+const steps = [
+  {
+    title: 'Create your account',
+    description: 'Sign up on the application portal with your email address.',
+  },
+  {
+    title: 'Fill in the application',
+    description:
+      'Tell us about your admission, your studies and your family’s financial situation.',
+  },
+  {
+    title: 'Review & selection',
+    description:
+      'Our team reviews every application on financial need and academic merit, then contacts selected students.',
+  },
+]
+
+const criteria = [
+  {
+    icon: BuildingIcon,
+    title: 'Secured admission',
+    description:
+      'You have admission at a recognised college or university in Pakistan.',
+  },
+  {
+    icon: WalletIcon,
+    title: 'Financial need',
+    description:
+      'You can show that you lack the funds for tuition and other study costs.',
+  },
+  {
+    icon: StarIcon,
+    title: 'Academic merit',
+    description:
+      'A strong academic record that reflects your dedication and potential.',
+  },
+  {
+    icon: TargetIcon,
+    title: 'Commitment',
+    description:
+      'A clear sense of how your education will help you reach your long-term goals.',
+  },
+]
+
+const legacy = [
+  {
+    when: 'Early years',
+    title: 'Ramzan Welfare Society',
+    description:
+      'Led by Muhammad Asghar Qazi, the Society set up a library and community hall in Gujrat.',
+  },
+  {
+    when: '2012',
+    title: 'The scholarship begins',
+    description:
+      'A small group of students facing financial hardship receive support for college and university.',
+  },
+  {
+    when: 'Today',
+    title: 'A decade-long commitment',
+    description:
+      'Now run by the sons of Muhammad Asghar Qazi, and still funded entirely by the family.',
+  },
+]
+
+function Hero() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
+    <section className="bg-forest-50">
+      <Container className="flex flex-col items-center gap-14 py-16 sm:py-[88px] lg:flex-row lg:pb-24">
+        <div className="flex min-w-0 flex-1 flex-col gap-7">
+          <span className="self-start rounded-full border border-forest-200 bg-white px-3.5 py-1.5 text-[13px] font-semibold tracking-[0.02em] text-forest-700">
+            Family-funded since 2012 · Gujrat, Pakistan
+          </span>
+          <h1 className="font-display text-[clamp(2.625rem,6vw,4.75rem)] font-extrabold leading-[1.02] tracking-display text-forest-900">
+            No talented student should leave education over{' '}
+            <span className="bg-[linear-gradient(transparent_62%,theme(colors.gold.soft)_62%)] text-forest-700">
+              money.
+            </span>
+          </h1>
+          <p className="max-w-[560px] text-lg leading-[1.65] text-ink-600 sm:text-[19px]">
+            The Ramzan Talent Scholarship helps students across Pakistan finish
+            college and university, so they can build careers and give back to
+            their communities.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button href={site.applyUrl}>
+              Start your application
+              <ArrowRightIcon className="h-[18px] w-[18px]" />
+            </Button>
+            <Button href="#eligibility" variant="secondary">
+              Check if you’re eligible
+            </Button>
+          </div>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-600">
+            {[
+              '100% online',
+              'Need + merit based',
+              'Any recognised college or university',
+            ].map((item) => (
+              <li key={item} className="inline-flex items-center gap-2">
+                <CheckIcon className="h-[18px] w-[18px] text-forest-700" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative w-full min-w-0 flex-1">
+          <Image
+            src={heroImage}
+            alt="Graduation cap resting on a globe beside a stack of books"
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className="h-[300px] w-full rounded-[32px] object-cover sm:h-[440px] lg:h-[520px]"
+            priority
+          />
+          {intake.open && (
+            <div className="absolute bottom-3 left-3 flex flex-col gap-1 rounded-[20px] bg-white px-5 py-4 shadow-float sm:bottom-6 sm:left-6 sm:min-w-[230px] sm:px-[22px] sm:py-5 lg:bottom-8 lg:left-[-24px]">
+              <span className="text-xs font-semibold uppercase tracking-[0.08em] text-gold-ink">
+                Deadline
+              </span>
+              <span className="font-display text-2xl font-extrabold leading-tight text-forest-900 sm:text-[30px]">
+                {intake.deadlineShort}
+              </span>
+              <span className="text-sm text-ink-600">
+                <DaysLeft />
+              </span>
+            </div>
+          )}
+          <div className="absolute right-3 top-3 hidden items-center gap-3 rounded-2xl bg-forest-900 px-[18px] py-3.5 text-white sm:right-5 sm:top-5 sm:flex">
+            <CapIcon className="h-[26px] w-[26px] text-gold" />
+            <span className="text-sm leading-snug">
+              <strong className="font-semibold">Need + merit</strong>
+              <br />
+              based selection
+            </span>
+          </div>
+        </div>
+      </Container>
+    </section>
   )
 }
 
-function BriefcaseIcon(props) {
+function Stats() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon(props) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function Article({ article }) {
-  return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
-    </Card>
-  )
-}
-
-function SocialLink({ icon: Icon, ...props }) {
-  return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
-  )
-}
-
-function Newsletter() {
-  return (
-    <form
-      action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-    >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
-      </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when we publish something new, and unsubscribe at any time.
-      </p>
-      <div className="mt-6 flex">
-        <input
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10"
-        />
-        <Button type="submit" className="ml-4 flex-none">
-          Join
-        </Button>
-      </div>
-    </form>
-  )
-}
-
-function Role({ role }) {
-  let startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
-  let startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
-
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
-
-  return (
-    <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
-      </div>
-      <dl className="flex flex-auto flex-wrap gap-x-2">
-        <dt className="sr-only">Company</dt>
-        <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-          {role.company}
-        </dd>
-        <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
-        </dd>
-        <dt className="sr-only">Date</dt>
-        <dd
-          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-          aria-label={`${startLabel} until ${endLabel}`}
-        >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
-        </dd>
-      </dl>
-    </li>
-  )
-}
-
-function Resume() {
-  let resume = [
-    {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
-      start: '2019',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
-    },
-    {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
-    },
-    {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
-    },
-  ]
-
-  return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
-        ))}
-      </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-      </Button>
-    </div>
-  )
-}
-
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-  return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
+    <section aria-label="At a glance" className="border-b border-[#E3EAE6]">
+      <Container
+        as="dl"
+        className="grid grid-cols-2 gap-x-4 gap-y-8 py-10 sm:py-12 lg:grid-cols-4 lg:gap-8"
+      >
+        {stats.map((stat) => (
           <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
-              rotations[imageIndex % rotations.length],
-            )}
+            key={stat.label}
+            className="flex flex-col-reverse justify-end gap-1"
           >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            <dt className="text-sm text-ink-600 sm:text-[15px]">
+              {stat.label}
+            </dt>
+            <dd className="font-display text-[34px] font-extrabold leading-none tracking-heading text-forest-900 sm:text-5xl">
+              {stat.value}
+            </dd>
           </div>
         ))}
-      </div>
-    </div>
+      </Container>
+    </section>
+  )
+}
+
+function HowItWorks() {
+  return (
+    <section>
+      <Container className="flex flex-col gap-12 py-16 sm:gap-14 sm:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading
+            eyebrow="How it works"
+            title="Apply in three simple steps"
+            className="max-w-[620px]"
+          />
+          <p className="max-w-[420px] text-ink-600">
+            The whole process happens online at {site.applyHost}, so there’s no
+            paperwork to post.
+          </p>
+        </div>
+        <ol className="grid gap-6 md:grid-cols-3">
+          {steps.map((step, index) => (
+            <li
+              key={step.title}
+              className="flex flex-col gap-4 rounded-3xl bg-forest-50 p-8"
+            >
+              <span
+                className={
+                  index === steps.length - 1
+                    ? 'flex h-12 w-12 items-center justify-center rounded-[14px] bg-gold font-display text-xl font-extrabold text-ink-on'
+                    : 'flex h-12 w-12 items-center justify-center rounded-[14px] bg-forest-900 font-display text-xl font-extrabold text-white'
+                }
+              >
+                {index + 1}
+              </span>
+              <h3 className="font-display text-2xl font-bold text-forest-900">
+                {step.title}
+              </h3>
+              <p className="text-ink-600">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </section>
+  )
+}
+
+function Eligibility() {
+  return (
+    <section id="eligibility" className="scroll-mt-24 bg-forest-50">
+      <Container className="flex flex-col gap-12 py-16 sm:py-28 lg:flex-row lg:gap-16">
+        <SectionHeading
+          eyebrow="Who can apply"
+          title="Is this scholarship for you?"
+          className="lg:w-[360px] lg:flex-none"
+        >
+          <p className="text-[17px] text-ink-600">
+            The scholarship is for students who have the talent and the drive,
+            but not the funds, to continue their education.
+          </p>
+          <Link
+            href="/scholarship#criteria"
+            className="inline-flex items-center gap-2 self-start py-2.5 font-semibold text-forest-700 hover:text-forest-900"
+          >
+            Read the full criteria
+            <ArrowRightIcon className="h-[18px] w-[18px]" />
+          </Link>
+        </SectionHeading>
+        <ul className="grid flex-1 gap-5 sm:grid-cols-2">
+          {criteria.map((item) => (
+            <li
+              key={item.title}
+              className="flex flex-col gap-3 rounded-[20px] border border-line bg-white p-7"
+            >
+              <item.icon className="h-8 w-8 text-forest-700" />
+              <h3 className="font-display text-xl font-bold text-forest-900">
+                {item.title}
+              </h3>
+              <p className="text-[15px] text-ink-600">{item.description}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  )
+}
+
+function Legacy() {
+  return (
+    <section className="bg-forest-900 text-forest-100">
+      <Container className="flex flex-col gap-14 py-16 sm:py-28 lg:flex-row lg:gap-16">
+        <div className="flex flex-1 flex-col gap-5">
+          <Eyebrow onDark>Our legacy</Eyebrow>
+          <h2 className="font-display text-[clamp(2.125rem,4vw,3.25rem)] font-extrabold leading-[1.05] tracking-heading text-white">
+            From a community library in Gujrat to students across Pakistan.
+          </h2>
+          <p className="text-lg text-forest-500">
+            The scholarship honours the memory of Qazi Muhammad Ramzan and
+            carries on the Qazi Family’s commitment to education and community
+            welfare.
+          </p>
+          <blockquote className="mt-2 font-display text-xl font-medium leading-[1.4] text-white sm:text-2xl">
+            “Education is the key to a brighter future, not just for individuals
+            but for the nation as a whole.”
+          </blockquote>
+          <Button
+            href="/about"
+            variant="gold"
+            size="md"
+            className="mt-2 self-start py-3.5"
+          >
+            Read our story
+            <ArrowRightIcon className="h-[18px] w-[18px]" />
+          </Button>
+        </div>
+        <ol className="flex flex-1 flex-col">
+          {legacy.map((item) => (
+            <li
+              key={item.when}
+              className="flex flex-col gap-2 border-t border-forest-100/20 py-7 last:border-b sm:flex-row sm:gap-6"
+            >
+              <span className="font-display text-[22px] font-extrabold text-gold sm:w-[120px] sm:flex-none">
+                {item.when}
+              </span>
+              <span className="flex flex-col gap-1.5">
+                <strong className="text-lg font-semibold text-white">
+                  {item.title}
+                </strong>
+                <span className="text-forest-500">{item.description}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </section>
+  )
+}
+
+function LatestUpdates({ articles }) {
+  return (
+    <section id="news">
+      <Container className="flex flex-col gap-12 py-16 sm:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow="News & articles" title="Latest updates" />
+          <Link
+            href="/articles"
+            className="py-2.5 font-semibold text-forest-700 hover:text-forest-900"
+          >
+            View all articles →
+          </Link>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article, index) => (
+            <ArticleCard
+              key={article.slug}
+              article={article}
+              featured={index === 0}
+            />
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function CallToAction() {
+  return (
+    <section>
+      <Container className="pb-16 sm:pb-28">
+        <div className="flex flex-col gap-8 rounded-[32px] bg-gold-cream px-6 py-10 sm:px-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex max-w-[620px] flex-col gap-3">
+            <h2 className="font-display text-[clamp(2rem,4vw,2.875rem)] font-extrabold leading-[1.08] tracking-heading text-forest-900">
+              Your education shouldn’t wait.
+            </h2>
+            <p className="text-lg text-ink-600">
+              {intake.open
+                ? `Applications for ${intake.year} close on ${intake.deadlineLabel}. Apply online in one sitting from your phone or computer.`
+                : 'Applications are currently closed. Follow our news for the next intake.'}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            {intake.open && <Button href={site.applyUrl}>Apply now</Button>}
+            <Button
+              href={whatsappHref()}
+              variant="secondary"
+              className="ring-gold-line"
+            >
+              <ChatIcon className="h-[18px] w-[18px]" />
+              Ask on WhatsApp
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </section>
   )
 }
 
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
+  let articles = (await getAllArticles()).slice(0, 3)
 
   return (
     <>
       <ApplicationsPopup />
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Ramzan Talent Scholarship Empowering Dreams, One Student at a Time.
-          </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-          Our mission is simple yet profound: to empower the future leaders 
-          of Pakistan by providing them with the support they need to complete 
-          their education and pursue their ambitions. With the tireless efforts of our team, 
-          we have helped hundreds of students continue their studies, 
-          build successful careers, and give back to their communities.
-          </p>
-          <div className="mt-6 flex gap-6 invisible">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
-            <SocialLink
-              href="#"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
-            <SocialLink
-              href="#"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="#"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
-          </div>
-        </div>
-      </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            {/* <Resume /> */}
-          </div>
-        </div>
-      </Container>
+      <Hero />
+      <Stats />
+      <HowItWorks />
+      <Eligibility />
+      <Legacy />
+      <LatestUpdates articles={articles} />
+      <CallToAction />
     </>
   )
 }
