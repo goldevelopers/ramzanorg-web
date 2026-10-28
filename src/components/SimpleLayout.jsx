@@ -1,17 +1,23 @@
 import { Container } from '@/components/Container'
+import { Eyebrow } from '@/components/SectionHeading'
 
-export function SimpleLayout({ title, intro, children }) {
+export function SimpleLayout({ eyebrow, title, intro, children }) {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <header className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          {title}
-        </h1>
-        <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-          {intro}
-        </p>
-      </header>
-      {children && <div className="mt-16 sm:mt-20">{children}</div>}
-    </Container>
+    <>
+      <section className="bg-forest-50">
+        <Container className="flex flex-col gap-5 py-16 sm:py-24">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h1 className="max-w-[860px] font-display text-[clamp(2.5rem,5.5vw,4.25rem)] font-extrabold leading-[1.03] tracking-display text-forest-900">
+            {title}
+          </h1>
+          {intro && (
+            <p className="max-w-[640px] text-lg text-ink-600 sm:text-[19px]">
+              {intro}
+            </p>
+          )}
+        </Container>
+      </section>
+      {children && <Container className="py-16 sm:py-24">{children}</Container>}
+    </>
   )
 }

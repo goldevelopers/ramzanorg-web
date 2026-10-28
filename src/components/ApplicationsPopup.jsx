@@ -10,30 +10,17 @@ import {
 } from '@headlessui/react'
 
 import { Button } from '@/components/Button'
+import { CloseIcon } from '@/components/Icons'
 import logoImage from '@/images/logo.png'
-
-const APPLY_URL = 'https://apply.ramzan.org.pk/signin'
-
-function CloseIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
+import { intake, site } from '@/lib/site'
 
 export function ApplicationsPopup() {
   let [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    setIsOpen(true)
+    if (intake.open) {
+      setIsOpen(true)
+    }
   }, [])
 
   function close() {
@@ -44,49 +31,51 @@ export function ApplicationsPopup() {
     <Dialog open={isOpen} onClose={close} className="relative z-[60]">
       <DialogBackdrop
         transition
-        className="fixed inset-0 bg-zinc-800/50 backdrop-blur-sm duration-200 data-[closed]:opacity-0 dark:bg-black/70"
+        className="fixed inset-0 bg-forest-950/50 backdrop-blur-sm duration-200 data-[closed]:opacity-0"
       />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
           transition
-          className="relative w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-xl ring-1 ring-zinc-900/5 duration-200 data-[closed]:scale-95 data-[closed]:opacity-0 dark:bg-zinc-900 dark:ring-zinc-800"
+          className="relative w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-float duration-200 data-[closed]:scale-95 data-[closed]:opacity-0"
         >
           <button
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute right-4 top-4 -m-1 p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full text-ink-500 hover:bg-forest-50 hover:text-forest-900"
           >
             <CloseIcon className="h-6 w-6" />
           </button>
-          <div className="mx-auto w-48 overflow-hidden rounded-2xl bg-white p-2">
-            <Image
-              src={logoImage}
-              alt="Ramzan Talent Scholarship"
-              sizes="12rem"
-              priority
-            />
+          <div className="mx-auto w-40">
+            <Image src={logoImage} alt={site.name} sizes="10rem" priority />
           </div>
-          <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-teal-500">
+          <p className="mt-6 text-[13px] font-semibold uppercase tracking-[0.12em] text-gold-ink">
             Applications are live
           </p>
-          <DialogTitle className="mt-2 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
-            Scholarship Applications for 2026 are now open!
+          <DialogTitle className="mt-2 font-display text-[28px] font-extrabold leading-tight tracking-heading text-forest-900">
+            Scholarship applications for {intake.year} are now open!
           </DialogTitle>
-          <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-            Apply now for the Ramzan Talent Scholarship 2026. The last date for
-            submission is 18th December 2026.
+          <p className="mt-4 text-ink-600">
+            Apply now for the Ramzan Talent Scholarship {intake.year}. The last
+            date for submission is {intake.deadlineLabel}.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button href={APPLY_URL} onClick={close}>
-              Apply Now
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button
+              href={site.applyUrl}
+              onClick={close}
+              size="md"
+              className="py-3.5"
+            >
+              Apply now
             </Button>
             <Button
-              href="/articles/applications-open-ramzan-talent-scholarship-2026"
+              href={intake.announcementHref}
               variant="secondary"
+              size="md"
+              className="py-3.5"
               onClick={close}
             >
-              Learn More
+              Learn more
             </Button>
           </div>
         </DialogPanel>

@@ -1,23 +1,82 @@
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
+import { DaysLeft } from '@/components/DaysLeft'
+import { ArrowRightIcon, ChatIcon } from '@/components/Icons'
+import { SimpleLayout } from '@/components/SimpleLayout'
+import { intake, site, whatsappHref } from '@/lib/site'
+
+export const metadata = {
+  title: 'Apply',
+  description: 'Apply online for the Ramzan Talent Scholarship.',
+}
+
+const steps = [
+  'Create an account on the application portal',
+  'Complete and submit the application form',
+  'Wait for the review and selection results',
+]
 
 export default function Apply() {
+  if (!intake.open) {
+    return (
+      <SimpleLayout
+        eyebrow="Apply"
+        title="Applications are currently closed"
+        intro="Keep an eye on our news page for the next intake, or contact us if you have a question."
+      />
+    )
+  }
+
   return (
-    <Container className="flex h-full items-center pt-16 sm:pt-32">
-      <div className="flex flex-col items-center">
-        <p className="text-base font-semibold text-red-400 dark:text-red-500">
-          Last Date: 30 Nov 2024
-        </p>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          Ramzan Talent Scholarship 2024
-        </h1>
-        <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-            Applications can be submit at <a href="mailto:scholarship@ramzan.org.pk">scholarship@ramzan.org.pk</a>
-        </p>
-        <Button href="/downloads/rts-2024-form.pdf" variant="secondary" className="mt-4">
-          Download Application Form
-        </Button>
-      </div>
-    </Container>
+    <>
+      <SimpleLayout
+        eyebrow={`${intake.year} intake`}
+        title={`Apply for the Ramzan Talent Scholarship ${intake.year}`}
+        intro={`Applications are open until ${intake.deadlineLabel}. The whole application happens online.`}
+      />
+      <Container className="flex flex-col gap-12 py-16 sm:py-24 lg:flex-row lg:items-start lg:gap-16">
+        <ol className="flex flex-1 flex-col gap-3">
+          {steps.map((step, index) => (
+            <li
+              key={step}
+              className="flex items-center gap-4 rounded-2xl bg-forest-50 px-5 py-4 text-[17px]"
+            >
+              <span
+                className={
+                  index === steps.length - 1
+                    ? 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-gold font-display font-extrabold text-ink-on'
+                    : 'flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-forest-900 font-display font-extrabold text-white'
+                }
+              >
+                {index + 1}
+              </span>
+              {step}
+            </li>
+          ))}
+        </ol>
+        <div className="flex w-full flex-col gap-4 rounded-3xl bg-forest-900 p-7 text-forest-100 lg:w-[360px] lg:flex-none">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
+            Deadline
+          </p>
+          <p className="font-display text-3xl font-extrabold text-white">
+            {intake.deadlineLabel}
+          </p>
+          <p className="text-forest-500">
+            <DaysLeft />
+          </p>
+          <Button href={site.applyUrl} variant="gold">
+            Start your application
+            <ArrowRightIcon className="h-[18px] w-[18px]" />
+          </Button>
+          <a
+            href={whatsappHref('Hi! I need help with the Ramzan Scholarship.')}
+            className="inline-flex items-center justify-center gap-2 py-2 font-semibold text-forest-500 hover:text-white"
+          >
+            <ChatIcon className="h-[18px] w-[18px]" />
+            Need help? Ask on WhatsApp
+          </a>
+        </div>
+      </Container>
+    </>
   )
 }
