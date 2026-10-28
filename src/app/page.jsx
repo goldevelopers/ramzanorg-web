@@ -10,7 +10,7 @@ import {
   ArrowRightIcon,
   BuildingIcon,
   CapIcon,
-  ChatIcon,
+  WhatsAppIcon,
   CheckIcon,
   StarIcon,
   TargetIcon,
@@ -377,7 +377,7 @@ function CallToAction() {
               variant="secondary"
               className="ring-gold-line"
             >
-              <ChatIcon className="h-[18px] w-[18px]" />
+              <WhatsAppIcon className="h-[18px] w-[18px]" />
               Ask on WhatsApp
             </Button>
           </div>
