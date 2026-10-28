@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
+import { EligibilityChecker } from '@/components/EligibilityChecker'
 import { Eyebrow, SectionHeading } from '@/components/SectionHeading'
 import { intake, site, whatsappHref } from '@/lib/site'
 
@@ -133,7 +134,7 @@ function WhyItMatters() {
 function Criteria() {
   return (
     <section id="criteria" className="scroll-mt-24 bg-forest-50">
-      <Container className="flex flex-col gap-12 py-16 sm:py-28 lg:flex-row lg:gap-16">
+      <Container className="flex flex-col gap-12 pb-14 pt-16 sm:pb-20 sm:pt-28 lg:flex-row lg:gap-16">
         <SectionHeading
           eyebrow="Eligibility criteria"
           title="What we look for"
@@ -162,6 +163,16 @@ function Criteria() {
             </li>
           ))}
         </ol>
+      </Container>
+      <Container
+        id="check-eligibility"
+        size="narrow"
+        className="scroll-mt-24 pb-16 sm:pb-28"
+      >
+        <h3 className="mb-6 text-center font-display text-2xl font-bold text-forest-900 sm:text-[28px]">
+          Check your eligibility in under a minute
+        </h3>
+        <EligibilityChecker />
       </Container>
     </section>
   )
