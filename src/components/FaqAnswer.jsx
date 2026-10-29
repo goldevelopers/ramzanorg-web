@@ -13,7 +13,7 @@ function RichText({ text }) {
 
 export function FaqAnswer({ blocks }) {
   return (
-    <div className="mt-3 flex flex-col gap-3 text-ink-600">
+    <div className="-mt-2 flex flex-col gap-3 pb-5 text-ink-600">
       {blocks.map((block, index) =>
         typeof block === 'string' ? (
           <p key={index}>

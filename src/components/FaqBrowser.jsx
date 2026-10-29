@@ -51,12 +51,12 @@ export function FaqBrowser() {
         </p>
         {!term && (
           <nav aria-label="FAQ topics">
-            <ul className="flex flex-wrap gap-2">
+            <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden">
               {faqGroups.map((group) => (
                 <li key={group.id}>
                   <a
                     href={`#${group.id}`}
-                    className="inline-flex rounded-full bg-forest-100 px-4 py-2 text-[15px] font-semibold text-forest-700 transition hover:bg-forest-200 hover:text-forest-900"
+                    className="inline-flex min-h-[44px] items-center whitespace-nowrap rounded-full bg-forest-100 px-4 text-[15px] font-semibold text-forest-700 transition hover:bg-forest-200 hover:text-forest-900 active:bg-forest-200"
                   >
                     {group.title}
                   </a>
@@ -77,9 +77,9 @@ export function FaqBrowser() {
               <details
                 key={item.question}
                 open={Boolean(term)}
-                className="group border-b border-line px-1 py-5"
+                className="group border-b border-line px-1"
               >
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-display text-lg font-bold leading-snug text-forest-900 sm:text-xl [&::-webkit-details-marker]:hidden">
+                <summary className="flex min-h-[56px] cursor-pointer list-none items-start justify-between gap-4 py-5 font-display text-lg font-bold leading-snug text-forest-900 transition active:bg-forest-50 sm:text-xl [&::-webkit-details-marker]:hidden">
                   {item.question}
                   <span
                     aria-hidden="true"

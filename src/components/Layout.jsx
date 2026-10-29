@@ -1,6 +1,7 @@
 import { AnnouncementBar } from '@/components/AnnouncementBar'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { MobileActionBar } from '@/components/MobileActionBar'
 
 export function Layout({ children }) {
   return (
@@ -9,6 +10,7 @@ export function Layout({ children }) {
       <Header />
       <main className="flex-auto">{children}</main>
       <Footer />
+      <MobileActionBar />
     </div>
   )
 }

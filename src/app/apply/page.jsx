@@ -36,7 +36,7 @@ export default function Apply() {
         title={`Apply for the Ramzan Talent Scholarship ${intake.year}`}
         intro={`Applications are open until ${intake.deadlineLabel}. The whole application happens online.`}
       />
-      <Container className="flex flex-col gap-12 py-16 sm:py-24 lg:flex-row lg:items-start lg:gap-16">
+      <Container className="flex flex-col gap-10 py-8 sm:gap-12 sm:py-24 lg:flex-row lg:items-start lg:gap-16">
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <ol className="flex flex-col gap-3">
             {steps.map((step, index) => (
@@ -60,7 +60,7 @@ export default function Apply() {
           <DocumentsChecklist />
           <FraudNotice />
         </div>
-        <div className="flex w-full flex-col gap-4 rounded-3xl bg-forest-900 p-7 text-forest-100 lg:w-[360px] lg:flex-none">
+        <div className="order-first flex w-full flex-col gap-4 rounded-3xl bg-forest-900 p-7 text-forest-100 lg:order-none lg:w-[360px] lg:flex-none">
           <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-gold">
             Deadline
           </p>
