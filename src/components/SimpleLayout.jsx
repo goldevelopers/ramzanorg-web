@@ -5,9 +5,9 @@ export function SimpleLayout({ eyebrow, title, intro, children }) {
   return (
     <>
       <section className="bg-forest-50">
-        <Container className="flex flex-col gap-5 py-16 sm:py-24">
+        <Container className="flex flex-col gap-4 py-10 sm:gap-5 sm:py-24">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <h1 className="max-w-[860px] font-display text-[clamp(2.5rem,5.5vw,4.25rem)] font-extrabold leading-[1.03] tracking-display text-forest-900">
+          <h1 className="max-w-[860px] font-display text-[clamp(2.125rem,5.5vw,4.25rem)] font-extrabold leading-[1.03] tracking-display text-forest-900">
             {title}
           </h1>
           {intro && (
@@ -17,7 +17,7 @@ export function SimpleLayout({ eyebrow, title, intro, children }) {
           )}
         </Container>
       </section>
-      {children && <Container className="py-16 sm:py-24">{children}</Container>}
+      {children && <Container className="py-10 sm:py-24">{children}</Container>}
     </>
   )
 }

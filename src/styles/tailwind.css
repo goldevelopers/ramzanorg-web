@@ -2,3 +2,12 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    /* No grey flash on tap; buttons give their own pressed feedback */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}

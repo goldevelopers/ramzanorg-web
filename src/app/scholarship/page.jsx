@@ -193,9 +193,9 @@ function Faq() {
             <details
               key={faq.question}
               open={index === 0}
-              className="group border-b border-line px-1 py-6"
+              className="group border-b border-line px-1"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold text-forest-900 [&::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-xl font-bold text-forest-900 transition active:bg-forest-50 [&::-webkit-details-marker]:hidden">
                 {faq.question}
                 <span
                   aria-hidden="true"

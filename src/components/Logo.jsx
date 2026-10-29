@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 
+import { Wordmark } from '@/components/Wordmark'
 import logoMark from '@/images/logo-mark.png'
 
 // The emblem from the logo, with the name set beside it in the same classic
@@ -31,14 +32,12 @@ export function Logo({ className, onDark = false, ...props }) {
         />
       </span>
       <span className="flex flex-col items-stretch gap-1">
-        <span
+        <Wordmark
           className={clsx(
-            'pl-[0.06em] text-center font-brand text-[24px] font-bold leading-none tracking-[0.06em] sm:text-[27px]',
+            'h-[17px] w-auto self-center sm:h-[19px]',
             onDark ? 'text-white' : 'text-forest-900',
           )}
-        >
-          RAMZAN
-        </span>
+        />
         <span
           className={clsx(
             'flex items-center gap-1.5 text-[9.5px] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[10.5px]',

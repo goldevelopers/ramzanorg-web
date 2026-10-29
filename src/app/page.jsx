@@ -97,8 +97,8 @@ const legacy = [
 function Hero() {
   return (
     <section className="bg-forest-50">
-      <Container className="flex flex-col items-center gap-14 py-16 sm:py-[88px] lg:flex-row lg:pb-24">
-        <div className="flex min-w-0 flex-1 flex-col gap-7">
+      <Container className="flex flex-col items-center gap-10 pb-12 pt-8 sm:gap-14 sm:py-[88px] lg:flex-row lg:pb-24">
+        <div className="flex min-w-0 flex-1 flex-col gap-6 sm:gap-7">
           <span className="self-start rounded-full border border-forest-200 bg-white px-3.5 py-1.5 text-[13px] font-semibold tracking-[0.02em] text-forest-700">
             Family-funded since 2012 · Gujrat, Pakistan
           </span>
@@ -211,25 +211,27 @@ function HowItWorks() {
             paperwork to post.
           </p>
         </div>
-        <ol className="grid gap-6 md:grid-cols-3">
+        <ol className="grid gap-3 md:grid-cols-3 md:gap-6">
           {steps.map((step, index) => (
             <li
               key={step.title}
-              className="flex flex-col gap-4 rounded-3xl bg-forest-50 p-8"
+              className="flex gap-4 rounded-3xl bg-forest-50 p-5 md:flex-col md:p-8"
             >
               <span
                 className={
                   index === steps.length - 1
-                    ? 'flex h-12 w-12 items-center justify-center rounded-[14px] bg-gold font-display text-xl font-extrabold text-ink-on'
-                    : 'flex h-12 w-12 items-center justify-center rounded-[14px] bg-forest-900 font-display text-xl font-extrabold text-white'
+                    ? 'flex h-11 w-11 flex-none items-center justify-center rounded-[14px] bg-gold font-display text-xl font-extrabold text-ink-on md:h-12 md:w-12'
+                    : 'flex h-11 w-11 flex-none items-center justify-center rounded-[14px] bg-forest-900 font-display text-xl font-extrabold text-white md:h-12 md:w-12'
                 }
               >
                 {index + 1}
               </span>
-              <h3 className="font-display text-2xl font-bold text-forest-900">
-                {step.title}
-              </h3>
-              <p className="text-ink-600">{step.description}</p>
+              <div className="flex flex-col gap-1.5 md:gap-4">
+                <h3 className="font-display text-xl font-bold text-forest-900 md:text-2xl">
+                  {step.title}
+                </h3>
+                <p className="text-ink-600">{step.description}</p>
+              </div>
             </li>
           ))}
         </ol>
@@ -263,13 +265,15 @@ function Eligibility() {
           {criteria.map((item) => (
             <li
               key={item.title}
-              className="flex flex-col gap-3 rounded-[20px] border border-line bg-white p-7"
+              className="flex gap-4 rounded-[20px] border border-line bg-white p-5 sm:flex-col sm:gap-3 sm:p-7"
             >
-              <item.icon className="h-8 w-8 text-forest-700" />
-              <h3 className="font-display text-xl font-bold text-forest-900">
-                {item.title}
-              </h3>
-              <p className="text-[15px] text-ink-600">{item.description}</p>
+              <item.icon className="h-8 w-8 flex-none text-forest-700" />
+              <div className="flex flex-col gap-1 sm:gap-3">
+                <h3 className="font-display text-xl font-bold text-forest-900">
+                  {item.title}
+                </h3>
+                <p className="text-[15px] text-ink-600">{item.description}</p>
+              </div>
             </li>
           ))}
         </ul>
@@ -347,17 +351,18 @@ function LatestUpdates({ articles }) {
           <SectionHeading eyebrow="News & articles" title="Latest updates" />
           <Link
             href="/articles"
-            className="py-2.5 font-semibold text-forest-700 hover:text-forest-900"
+            className="inline-flex min-h-[44px] items-center font-semibold text-forest-700 hover:text-forest-900"
           >
             View all articles →
           </Link>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
           {articles.map((article, index) => (
             <ArticleCard
               key={article.slug}
               article={article}
               featured={index === 0}
+              className="w-[82%] flex-none snap-start md:w-auto"
             />
           ))}
         </div>

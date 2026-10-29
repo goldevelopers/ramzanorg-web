@@ -113,13 +113,13 @@ function Sidebar() {
         </p>
         <a
           href={whatsappHref()}
-          className="py-1 text-[15px] font-semibold text-forest-700 hover:text-forest-900"
+          className="inline-flex min-h-[44px] items-center text-[15px] font-semibold text-forest-700 hover:text-forest-900"
         >
           WhatsApp {site.whatsappLabel}
         </a>
         <a
           href={`mailto:${site.email}`}
-          className="py-1 text-[15px] font-semibold text-forest-700 hover:text-forest-900"
+          className="inline-flex min-h-[44px] items-center text-[15px] font-semibold text-forest-700 hover:text-forest-900"
         >
           {site.email}
         </a>
@@ -133,16 +133,28 @@ export function ArticleLayout({ article, children }) {
     <>
       <section className="bg-forest-50">
         <Container className="flex flex-col gap-7 pb-14 pt-10 sm:pb-[72px] sm:pt-12">
-          <nav aria-label="Breadcrumb">
+          <Link
+            href="/articles"
+            className="-my-2 inline-flex min-h-[44px] items-center gap-2 self-start text-[15px] font-semibold text-forest-700 sm:hidden"
+          >
+            <span aria-hidden="true">←</span> All news &amp; articles
+          </Link>
+          <nav aria-label="Breadcrumb" className="hidden sm:block">
             <ol className="flex flex-wrap items-center gap-2 text-sm text-ink-500">
               <li>
-                <Link href="/" className="hover:text-forest-900">
+                <Link
+                  href="/"
+                  className="inline-flex min-h-[44px] items-center hover:text-forest-900"
+                >
                   Home
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/articles" className="hover:text-forest-900">
+                <Link
+                  href="/articles"
+                  className="inline-flex min-h-[44px] items-center hover:text-forest-900"
+                >
                   News &amp; articles
                 </Link>
               </li>

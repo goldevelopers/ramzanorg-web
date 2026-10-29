@@ -21,7 +21,7 @@ export function Button({
   ...props
 }) {
   className = clsx(
-    'inline-flex items-center justify-center gap-2.5 rounded-full font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700',
+    'inline-flex select-none items-center justify-center gap-2.5 rounded-full font-semibold transition active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700',
     variantStyles[variant],
     sizeStyles[size],
     className,

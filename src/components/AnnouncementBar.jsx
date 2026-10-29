@@ -7,20 +7,23 @@ export function AnnouncementBar() {
 
   return (
     <div className="bg-forest-900 text-sm text-forest-100">
-      <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 text-center sm:px-6">
+      <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-center gap-x-1.5 gap-y-1 px-4 py-2 text-center sm:gap-x-4 sm:px-6">
         <span className="inline-flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
           <strong className="font-semibold text-white">
-            Applications for {intake.year} are open
+            <span className="sm:hidden">{intake.year} applications open</span>
+            <span className="hidden sm:inline">
+              Applications for {intake.year} are open
+            </span>
           </strong>
         </span>
         <span className="hidden sm:inline">
           Last date to apply: {intake.deadlineLabel}
         </span>
-        <span className="sm:hidden">Closes {intake.deadlineShort}</span>
+        <span className="sm:hidden">· closes {intake.deadlineShort}</span>
         <a
           href={site.applyUrl}
-          className="font-semibold text-gold hover:text-gold-soft"
+          className="hidden min-h-[32px] items-center font-semibold text-gold hover:text-gold-soft sm:inline-flex"
         >
           Apply now →
         </a>

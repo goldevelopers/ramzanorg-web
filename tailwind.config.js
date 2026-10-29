@@ -58,7 +58,6 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         display: ['var(--font-display)', 'var(--font-inter)', 'sans-serif'],
-        brand: ['var(--font-brand)', 'Georgia', 'serif'],
       },
       letterSpacing: {
         display: '-0.035em',
@@ -66,6 +65,25 @@ module.exports = {
       },
       boxShadow: {
         float: '0 20px 40px rgba(7, 59, 46, 0.16)',
+      },
+      keyframes: {
+        'sheet-down': {
+          from: { opacity: '0', transform: 'translateY(-16px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        'pop-in': {
+          from: { opacity: '0', transform: 'scale(0.96)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
+        'bar-up': {
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'sheet-down': 'sheet-down 200ms ease-out',
+        'pop-in': 'pop-in 200ms ease-out',
+        'bar-up': 'bar-up 300ms ease-out',
       },
     },
   },

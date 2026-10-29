@@ -5,7 +5,8 @@ import { WhatsAppWidget } from '@/components/WhatsAppWidget'
 import { site, whatsappHref } from '@/lib/site'
 
 function FooterLink({ href, children }) {
-  let className = 'text-forest-500 transition hover:text-white'
+  let className =
+    'inline-flex min-h-[44px] items-center text-forest-500 transition hover:text-white active:text-white'
   return /^(https?:|mailto:)/.test(href) ? (
     <a href={href} className={className}>
       {children}
@@ -20,7 +21,7 @@ function FooterLink({ href, children }) {
 export function Footer() {
   return (
     <footer id="contact" className="bg-forest-950 text-[15px] text-forest-500">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 pb-8 pt-16 sm:px-6 sm:pt-[72px]">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 px-4 pb-[calc(6.5rem+env(safe-area-inset-bottom))] pt-16 sm:px-6 sm:pt-[72px] lg:pb-8">
         <div className="flex flex-wrap justify-between gap-12">
           <div className="flex max-w-[380px] flex-col gap-4">
             <Logo onDark aria-label={`${site.name} home`} />
@@ -30,16 +31,16 @@ export function Footer() {
             </p>
           </div>
           <div className="flex flex-wrap gap-12 sm:gap-16">
-            <div className="flex flex-col gap-2.5">
-              <p className="font-semibold text-white">Explore</p>
+            <div className="flex flex-col">
+              <p className="mb-1 font-semibold text-white">Explore</p>
               <FooterLink href="/about">About</FooterLink>
               <FooterLink href="/scholarship">Scholarship</FooterLink>
               <FooterLink href="/articles">Articles</FooterLink>
               <FooterLink href="/faq">FAQ</FooterLink>
               <FooterLink href="/apply">Apply</FooterLink>
             </div>
-            <div className="flex flex-col gap-2.5">
-              <p className="font-semibold text-white">Contact</p>
+            <div className="flex flex-col">
+              <p className="mb-1 font-semibold text-white">Contact</p>
               <FooterLink href={`mailto:${site.email}`}>
                 {site.email}
               </FooterLink>

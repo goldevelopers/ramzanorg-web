@@ -39,7 +39,7 @@ export default function Faq() {
         title="Frequently asked questions"
         intro="Everything students and parents ask us about eligibility, documents, applying and how the scholarship is paid."
       />
-      <Container className="flex flex-col gap-12 py-14 sm:py-20 lg:flex-row lg:items-start lg:gap-16">
+      <Container className="flex flex-col gap-10 py-8 sm:gap-12 sm:py-20 lg:flex-row lg:items-start lg:gap-16">
         <div className="flex min-w-0 flex-1 flex-col gap-10">
           <FraudNotice className="lg:hidden" />
           <FaqBrowser />
@@ -65,7 +65,7 @@ export default function Faq() {
             </Button>
             <a
               href={`mailto:${site.email}`}
-              className="py-1 text-center text-[15px] font-semibold text-forest-500 hover:text-white"
+              className="inline-flex min-h-[44px] items-center justify-center text-[15px] font-semibold text-forest-500 hover:text-white"
             >
               {site.email}
             </a>
