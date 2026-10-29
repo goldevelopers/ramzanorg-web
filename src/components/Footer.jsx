@@ -35,6 +35,7 @@ export function Footer() {
               <FooterLink href="/about">About</FooterLink>
               <FooterLink href="/scholarship">Scholarship</FooterLink>
               <FooterLink href="/articles">Articles</FooterLink>
+              <FooterLink href="/faq">FAQ</FooterLink>
               <FooterLink href="/apply">Apply</FooterLink>
             </div>
             <div className="flex flex-col gap-2.5">

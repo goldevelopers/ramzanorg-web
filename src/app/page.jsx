@@ -51,25 +51,25 @@ const criteria = [
     icon: BuildingIcon,
     title: 'Secured admission',
     description:
-      'You have admission at a recognised college or university in Pakistan.',
+      'You have admission to a diploma, DAE, bachelor’s or master’s programme in Pakistan.',
   },
   {
     icon: WalletIcon,
     title: 'Financial need',
     description:
-      'You can show that you lack the funds for tuition and other study costs.',
+      'Your family finds it hard to pay your fees. Priority goes to lower-income families.',
   },
   {
     icon: StarIcon,
     title: 'Academic merit',
     description:
-      'A strong academic record that reflects your dedication and potential.',
+      'No minimum percentage, but your results are weighed alongside your need.',
   },
   {
     icon: TargetIcon,
-    title: 'Commitment',
+    title: 'No other scholarship',
     description:
-      'A clear sense of how your education will help you reach your long-term goals.',
+      'You aren’t already receiving a scholarship from another organisation.',
   },
 ]
 
