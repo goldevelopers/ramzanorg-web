@@ -12,7 +12,8 @@ export const requiredDocuments = [
 ]
 
 // Each answer is a list of blocks: a string is a paragraph, { list } is a
-// bulleted list. Keep answers short and in plain language.
+// bulleted list. Wrap words in **double asterisks** to make them bold.
+// Keep answers short and in plain language.
 export const faqGroups = [
   {
     id: 'eligibility',
@@ -94,9 +95,26 @@ export const faqGroups = [
       },
       {
         question:
-          'My father is a daily-wage worker, farmer or shopkeeper and has no salary slip. What income proof should I give?',
+          'My father is a daily-wage worker, farmer or shopkeeper and has no salary slip. How do I show his income?',
         answer: [
-          'Submit any document that shows the nature of your father’s or guardian’s work and income. A salary slip is not required.',
+          'You don’t need a salary slip. Provide whichever of these fits your father’s work:',
+          {
+            list: [
+              '**Farmer:** a land record (fard) or income certificate from the patwari or tehsildar.',
+              '**Shopkeeper or small business:** a shop rent agreement, trade licence, or tax or utility record for the business, if available.',
+              '**Daily-wage worker:** a letter from the employer or contractor stating his work and approximate monthly earnings.',
+            ],
+          },
+          '**If no other proof is available,** your father can write an **undertaking on plain white paper**. It should state:',
+          {
+            list: [
+              'his name and CNIC number',
+              'his occupation',
+              'his approximate monthly income',
+              'that the information is true',
+            ],
+          },
+          'He signs it, and it must be **attested (signed and stamped) by a Grade 17 or above government officer**. Attach a copy of his CNIC with it.',
         ],
       },
       {
@@ -254,4 +272,5 @@ export function answerToText(answer) {
       typeof block === 'string' ? block : block.list.join('; ') + '.',
     )
     .join(' ')
+    .replace(/\*\*/g, '')
 }
