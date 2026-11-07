@@ -145,7 +145,7 @@ function Hero() {
             priority
           />
           {intake.open && (
-            <div className="absolute bottom-3 left-3 flex flex-col gap-1 rounded-[20px] bg-white px-5 py-4 shadow-float sm:bottom-6 sm:left-6 sm:min-w-[230px] sm:px-[22px] sm:py-5 lg:bottom-8 lg:left-[-24px]">
+            <div className="glass absolute bottom-3 left-3 flex flex-col gap-1 rounded-[22px] px-5 py-4 sm:bottom-6 sm:left-6 sm:min-w-[230px] sm:px-[22px] sm:py-5 lg:bottom-8 lg:left-[-24px]">
               <span className="text-xs font-semibold uppercase tracking-[0.08em] text-gold-ink">
                 Deadline
               </span>
@@ -157,7 +157,7 @@ function Hero() {
               </span>
             </div>
           )}
-          <div className="absolute right-3 top-3 hidden items-center gap-3 rounded-2xl bg-forest-900 px-[18px] py-3.5 text-white sm:right-5 sm:top-5 sm:flex">
+          <div className="glass-dark absolute right-3 top-3 hidden items-center gap-3 rounded-2xl px-[18px] py-3.5 text-white sm:right-5 sm:top-5 sm:flex">
             <CapIcon className="h-[26px] w-[26px] text-gold" />
             <span className="text-sm leading-snug">
               <strong className="font-semibold">Need + merit</strong>

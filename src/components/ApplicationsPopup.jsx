@@ -50,9 +50,9 @@ export function ApplicationsPopup() {
       open={isOpen}
       onClose={close}
       aria-labelledby="applications-popup-title"
-      className="m-auto w-[calc(100%-2rem)] max-w-md open:animate-pop-in motion-reduce:open:animate-none"
+      className="m-auto w-[calc(100%-2rem)] max-w-md backdrop:bg-forest-950/30 backdrop:backdrop-blur-md open:animate-pop-in motion-reduce:open:animate-none"
     >
-      <div className="relative rounded-3xl bg-white px-6 pb-7 pt-8 text-center shadow-float sm:p-8">
+      <div className="glass-strong relative rounded-[28px] px-6 pb-7 pt-8 text-center sm:p-8">
         <button
           type="button"
           onClick={close}
@@ -61,7 +61,7 @@ export function ApplicationsPopup() {
         >
           <CloseIcon className="h-6 w-6" />
         </button>
-        <div className="mx-auto w-32 sm:w-40">
+        <div className="mx-auto w-32 rounded-2xl bg-white p-2 shadow-[0_8px_20px_-10px_rgba(7,59,46,0.35)] sm:w-40">
           <Image src={logoImage} alt={site.name} sizes="10rem" />
         </div>
         <p className="mt-5 text-[13px] font-semibold uppercase tracking-[0.12em] text-gold-ink">

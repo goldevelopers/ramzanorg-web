@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 
 // A modal built on the browser's native <dialog>: it handles focus trapping,
-// the Escape key and the backdrop without shipping a UI library.
+// the Escape key and the backdrop without shipping a UI library. Style the
+// dimmed backdrop with Tailwind's `backdrop:` modifier in className.
 export function Modal({ open, onClose, className, children, ...props }) {
   let ref = useRef(null)
 
@@ -42,7 +43,7 @@ export function Modal({ open, onClose, className, children, ...props }) {
         }
       }}
       className={clsx(
-        'max-h-none border-0 bg-transparent p-0 text-ink backdrop:bg-forest-950/40 backdrop:backdrop-blur-sm',
+        'max-h-none border-0 bg-transparent p-0 text-ink',
         className,
       )}
       {...props}

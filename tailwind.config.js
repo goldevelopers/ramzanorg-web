@@ -79,11 +79,16 @@ module.exports = {
           from: { transform: 'translateY(100%)' },
           to: { transform: 'translateY(0)' },
         },
+        'drawer-in': {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(0)' },
+        },
       },
       animation: {
         'sheet-down': 'sheet-down 200ms ease-out',
         'pop-in': 'pop-in 200ms ease-out',
         'bar-up': 'bar-up 300ms ease-out',
+        'drawer-in': 'drawer-in 280ms cubic-bezier(0.32, 0.72, 0, 1)',
       },
     },
   },
