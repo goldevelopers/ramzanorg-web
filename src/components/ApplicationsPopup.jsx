@@ -31,12 +31,12 @@ export function ApplicationsPopup() {
     <Dialog open={isOpen} onClose={close} className="relative z-[60]">
       <DialogBackdrop
         transition
-        className="fixed inset-0 bg-forest-950/50 backdrop-blur-sm duration-200 data-[closed]:opacity-0"
+        className="fixed inset-0 bg-forest-950/30 backdrop-blur-md duration-200 data-[closed]:opacity-0"
       />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
           transition
-          className="relative w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-float duration-200 data-[closed]:scale-95 data-[closed]:opacity-0"
+          className="glass-strong relative w-full max-w-md rounded-[28px] p-8 text-center duration-200 data-[closed]:scale-95 data-[closed]:opacity-0"
         >
           <button
             type="button"
@@ -46,7 +46,7 @@ export function ApplicationsPopup() {
           >
             <CloseIcon className="h-6 w-6" />
           </button>
-          <div className="mx-auto w-40">
+          <div className="mx-auto w-40 rounded-2xl bg-white p-2 shadow-[0_8px_20px_-10px_rgba(7,59,46,0.35)]">
             <Image src={logoImage} alt={site.name} sizes="10rem" priority />
           </div>
           <p className="mt-6 text-[13px] font-semibold uppercase tracking-[0.12em] text-gold-ink">
